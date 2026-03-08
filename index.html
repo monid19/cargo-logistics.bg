@@ -169,7 +169,7 @@
                 <input type="checkbox" id="s-sofia">
                 <span class="stoggle-box"></span>
                 Транспорт до София/Пловдив
-                <span class="stoggle-price">+150 €</span>
+                <span class="stoggle-price">+200 €</span>
               </label>
             </div>
           </div>
@@ -345,7 +345,7 @@ function sliderUpdate(krwPrice) {
   let extras = 0;
   if (document.getElementById('s-homologation').checked) extras += 307;
   if (document.getElementById('s-gas').checked)          extras += 153;
-  if (document.getElementById('s-sofia').checked)        extras += 150;
+  if (document.getElementById('s-sofia').checked)        extras += 200;
 
   const total = carEur + loading + transport + insurance + port + taxes + customs + unloading + commission + extras;
 
