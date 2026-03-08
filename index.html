@@ -274,131 +274,146 @@
     
     <script>
       // Scroll animations
-      const obs = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-          if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
-        });
-      }, { threshold: 0.1 });
-      document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
-      
-      // Form submit
-      function handleSubmit(e) {
-        e.preventDefault();
-        const btn = e.target.querySelector('.form-submit');
-        btn.textContent = '✓ Изпратено успешно!';
-        btn.style.background = 'var(--lime-bright)';
-        setTimeout(() => {
-          btn.textContent = 'Изпрати Запитване →';
-          btn.style.background = '';
-          e.target.reset();
-        }, 3000);
-      }
-      
-      // ── KRW → EUR live rate calculator ──
-      const FIXED_EUR   = 250 + 1300 + 30 + 100 + 92 + 92 + 435; // fixed logistics costs in EUR
-      let   krwPerEur   = null; // filled after API call
-      
-      function fmtKrw(n) {
-        return n.toLocaleString('ko-KR') + ' ₩';
-      }
-      function fmtEur(n) {
-        return n.toLocaleString('bg-BG', { minimumFractionDigits: 0, maximumFractionDigits: 0 }) + ' €';
-      }
-      
-      function sliderUpdate(krwPrice) {
-        // Show KRW price
-        document.getElementById('scp-display').textContent = fmtKrw(krwPrice);
-      
-        if (!krwPerEur) {
-          document.getElementById('sr-total').textContent = 'Зарежда…';
-          return;
-        }
-      
-        const carEur = krwPrice / krwPerEur;
-      
-        // Show EUR equivalent of car price
-        document.getElementById('scp-eur-equiv').textContent =
-          '≈ ' + carEur.toLocaleString('bg-BG', { minimumFractionDigits: 0, maximumFractionDigits: 0 }) + ' EUR';
-      
-        // Duty & VAT
-        const dutyBase = (carEur + 250 + 1300) * 1.32;
-        const duty     = dutyBase * 0.10;
-        const vat      = (dutyBase + duty) * 0.20;
-        const taxes    = duty + vat;
-      
-        // Extras
-        let extras = 0;
-        if (document.getElementById('s-homologation').checked) extras += 307;
-        if (document.getElementById('s-gas').checked)          extras += 153;
-        if (document.getElementById('s-sofia').checked)        extras += 150;
-      
-        const total = carEur + FIXED_EUR + taxes + extras;
-      
-        document.getElementById('sr-car').textContent    = fmtEur(carEur);
-        document.getElementById('sr-taxes').textContent  = fmtEur(taxes);
-        document.getElementById('sr-total').textContent  = fmtEur(total);
-      
-        if (extras > 0) {
-          document.getElementById('sr-extras-row').style.display = '';
-          document.getElementById('sr-extras').textContent = fmtEur(extras);
-        } else {
-          document.getElementById('sr-extras-row').style.display = 'none';
-        }
-      
-        // Update slider fill
-        const sliderEl = document.getElementById('car-slider');
-        const pct = ((krwPrice - sliderEl.min) / (sliderEl.max - sliderEl.min)) * 100;
-        sliderEl.style.background =
-          `linear-gradient(to right, var(--lime) 0%, var(--lime) ${pct}%, #d8ecd0 ${pct}%, #d8ecd0 100%)`;
-      }
-      
-      // Fetch live KRW/EUR rate from Frankfurter (ECB-backed, no API key)
-      async function fetchRate() {
-        const badge = document.getElementById('scp-rate-badge');
-        try {
-          const res  = await fetch('https://api.frankfurter.dev/v1/latest?base=EUR&symbols=KRW');
-          const data = await res.json();
-          krwPerEur  = data.rates.KRW;
-          const rateDisplay = Math.round(krwPerEur).toLocaleString('ko-KR');
-          badge.textContent  = `1 € = ${rateDisplay} ₩  •  ${data.date}`;
-          badge.style.background = '#eef6ea';
-          sliderUpdate(parseInt(document.getElementById('car-slider').value));
-        } catch (err) {
-          badge.textContent  = 'Курсът е недостъпен';
-          badge.style.background = '#fde8e8';
-          badge.style.color = '#c0392b';
-          // fallback rate
-          krwPerEur = 1480;
-          sliderUpdate(parseInt(document.getElementById('car-slider').value));
-        }
-      }
-      
-      // Wire up slider and manual input
-      const sliderEl    = document.getElementById('car-slider');
-      const manualInput = document.getElementById('scp-input');
-      
-      sliderEl.addEventListener('input', () => {
-        const val = parseInt(sliderEl.value);
-        manualInput.value = val;
-        sliderUpdate(val);
-      });
-      
-      manualInput.addEventListener('input', () => {
-        let val = parseInt(manualInput.value) || 1000000;
-        val = Math.min(Math.max(val, 1000000), 50000000);
-        sliderEl.value = val;
-        sliderUpdate(val);
-      });
-      
-      ['s-homologation', 's-gas', 's-sofia'].forEach(id => {
-        document.getElementById(id).addEventListener('change', () => {
-          sliderUpdate(parseInt(sliderEl.value));
-        });
-      });
-      
-      // Init: show placeholder then fetch rate
-      sliderUpdate(10000000);
-      fetchRate();
+        
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+// Form submit
+function handleSubmit(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('.form-submit');
+  btn.textContent = '✓ Изпратено успешно!';
+  btn.style.background = 'var(--lime-bright)';
+  setTimeout(() => {
+    btn.textContent = 'Изпрати Запитване →';
+    btn.style.background = '';
+    e.target.reset();
+  }, 3000);
+}
+
+// ── KRW → EUR live rate calculator ──
+const FIXED_EUR   = 250 + 1300 + 30 + 100 + 92 + 92 + 435; // fixed logistics costs in EUR
+let   krwPerEur   = null; // filled after API call
+
+function fmtKrw(n) {
+  return n.toLocaleString('ko-KR') + ' ₩';
+}
+function fmtEur(n) {
+  return n.toLocaleString('bg-BG', { minimumFractionDigits: 0, maximumFractionDigits: 0 }) + ' €';
+}
+
+function sliderUpdate(krwPrice) {
+  // Show KRW price
+  document.getElementById('scp-display').textContent = fmtKrw(krwPrice);
+
+  if (!krwPerEur) {
+    document.getElementById('sr-total').textContent = 'Зарежда…';
+    return;
+  }
+
+  const carEur = krwPrice / krwPerEur;
+
+  // Show EUR equivalent of car price
+  document.getElementById('scp-eur-equiv').textContent =
+    '≈ ' + carEur.toLocaleString('bg-BG', { minimumFractionDigits: 0, maximumFractionDigits: 0 }) + ' EUR';
+
+  // Fixed logistics costs (these are always added)
+  const loading   = 250;
+  const transport = 1300;
+  const insurance = 30;
+  const port      = 100;
+  const customs   = 92;
+  const unloading = 92;
+  const commission = 435;
+
+  // Excel formula: Total = (car + loading + transport + insurance + port) * 1.32
+  //                        + customs + unloading + commission + extras
+  // Duty = (car + loading + transport + insurance) * 0.10
+  // VAT  = (car + loading + transport + insurance + duty + port) * 0.20
+
+  const dutyBase = carEur + loading + transport + insurance;
+  const duty     = dutyBase * 0.10;
+  const vatBase  = dutyBase + duty + port;
+  const vat      = vatBase * 0.20;
+  const taxes    = duty + vat;
+
+  // Extras
+  let extras = 0;
+  if (document.getElementById('s-homologation').checked) extras += 307;
+  if (document.getElementById('s-gas').checked)          extras += 153;
+  if (document.getElementById('s-sofia').checked)        extras += 150;
+
+  const total = carEur + loading + transport + insurance + port + taxes + customs + unloading + commission + extras;
+
+  document.getElementById('sr-car').textContent    = fmtEur(carEur);
+  document.getElementById('sr-taxes').textContent  = fmtEur(taxes);
+  document.getElementById('sr-total').textContent  = fmtEur(total);
+
+  if (extras > 0) {
+    document.getElementById('sr-extras-row').style.display = '';
+    document.getElementById('sr-extras').textContent = fmtEur(extras);
+  } else {
+    document.getElementById('sr-extras-row').style.display = 'none';
+  }
+
+  // Update slider fill
+  const sliderEl = document.getElementById('car-slider');
+  const pct = ((krwPrice - sliderEl.min) / (sliderEl.max - sliderEl.min)) * 100;
+  sliderEl.style.background =
+    `linear-gradient(to right, var(--lime) 0%, var(--lime) ${pct}%, #d8ecd0 ${pct}%, #d8ecd0 100%)`;
+}
+
+// Fetch live KRW/EUR rate from Frankfurter (ECB-backed, no API key)
+async function fetchRate() {
+  const badge = document.getElementById('scp-rate-badge');
+  try {
+    const res  = await fetch('https://api.frankfurter.dev/v1/latest?base=EUR&symbols=KRW');
+    const data = await res.json();
+    krwPerEur  = data.rates.KRW;
+    const rateDisplay = Math.round(krwPerEur).toLocaleString('ko-KR');
+    badge.textContent  = `1 € = ${rateDisplay} ₩  •  ${data.date}`;
+    badge.style.background = '#eef6ea';
+    sliderUpdate(parseInt(document.getElementById('car-slider').value));
+  } catch (err) {
+    badge.textContent  = 'Курсът е недостъпен';
+    badge.style.background = '#fde8e8';
+    badge.style.color = '#c0392b';
+    // fallback rate
+    krwPerEur = 1480;
+    sliderUpdate(parseInt(document.getElementById('car-slider').value));
+  }
+}
+
+// Wire up slider and manual input
+const sliderEl    = document.getElementById('car-slider');
+const manualInput = document.getElementById('scp-input');
+
+sliderEl.addEventListener('input', () => {
+  const val = parseInt(sliderEl.value);
+  manualInput.value = val;
+  sliderUpdate(val);
+});
+
+manualInput.addEventListener('input', () => {
+  let val = parseInt(manualInput.value) || 1000000;
+  val = Math.min(Math.max(val, 1000000), 50000000);
+  sliderEl.value = val;
+  sliderUpdate(val);
+});
+
+['s-homologation', 's-gas', 's-sofia'].forEach(id => {
+  document.getElementById(id).addEventListener('change', () => {
+    sliderUpdate(parseInt(sliderEl.value));
+  });
+});
+
+// Init: show placeholder then fetch rate
+sliderUpdate(10000000);
+fetchRate();
       </script>
     </body>
     </html>

@@ -73,7 +73,8 @@
   .page-hero-bg {
     position: absolute;
     inset: 0;
-    background:
+    background-image: url(aboutus.png);
+   background:
       radial-gradient(ellipse 80% 60% at 70% 50%, rgba(126,211,33,0.07) 0%, transparent 70%),
       linear-gradient(135deg, var(--green-dark) 0%, var(--green-brand) 60%, var(--green-mid) 100%);
     z-index: 0;
