@@ -14,16 +14,17 @@
     <nav>
       <a class="nav-logo" href="#"><img src="Logo-3.png" alt="Cargo Logistics"></a>
       <ul class="nav-links">
-        <li><a href="#">Начало</a></li>
+        <li><a href="#start">Начало</a></li>
         <li><a href="#how">Как работи?</a></li>
         <li><a href="#services" class="active">Услуги</a></li>
         <li><a href="#calculator">Калкулатор</a></li>
+        <li><a href="about.html">За нас</a></li>
         <li><a href="#contact" class="nav-cta">Запитване</a></li>
       </ul>
     </nav>
     
     <!-- HERO -->
-    <section class="hero">
+    <section class="hero" id="start">
       <div class="hero-bg"></div>
       <div class="hero-left">
         <div class="hero-eyebrow">Актуален корейски пазар 2025</div>
@@ -87,7 +88,7 @@
             <div class="step-num">03</div>
             <div class="step-body">
               <h3>Ние се грижим за всичко останало</h3>
-              <p>Закупуване, контейнер, морски транспорт, митница, разтоварване и пълен комплект документи за регистрация в КАТ.</p>
+              <p>Закупуване, контейнер, товарене и укрепване в контейнер, морски транспорт, митница, разтоварване и пълен комплект документи за регистрация в КАТ.</p>
             </div>
           </div>
         </div>
@@ -115,29 +116,39 @@
     <section class="pricing-section" id="calculator">
       <div class="section-tag fade-up">Калкулатор</div>
       <h2 class="fade-up">Колко ще струва вашата кола?</h2>
-      <p class="fade-up" style="color:var(--gray-mid);font-size:0.9rem;max-width:520px;line-height:1.8;margin-bottom:3rem;font-weight:400;">Преместете плъзгача до цената на автомобила в Корея — ние изчисляваме ориентировъчната крайна цена за доставка до България.</p>
+      <!-- <p class="fade-up" style="color:var(--gray-mid);font-size:0.9rem;max-width:520px;line-height:1.8;margin-bottom:3rem;font-weight:400;">Въведете цената на автомобила в корейски вон — ние конвертираме по актуален курс и изчисляваме ориентировъчната крайна цена в евро.</p> -->
     
       <div class="slider-calc-wrap fade-up" style="transition-delay:0.1s">
-        <!-- Slider side -->
-        <div class="slider-side">
-          <div class="slider-car-price-display">
-            <span class="scp-label">Цена на автомобила в Корея</span>
-            <div class="scp-value-wrap">
-              <span class="scp-value" id="scp-display">10 000 €</span>
-              <span class="scp-or">или въведете сами</span>
-              <input type="number" id="scp-input" class="scp-manual" value="10000" min="1000" max="50000" step="500">
-            </div>
-          </div>
-    
-          <div class="slider-track-wrap">
-            <input type="range" id="car-slider" class="car-slider" min="1000" max="50000" step="500" value="10000">
-            <div class="slider-labels">
-              <span>1 000 €</span>
-              <span>15 000 €</span>
-              <span>30 000 €</span>
-              <span>50 000 €</span>
-            </div>
-          </div>
+        
+       <!-- Slider side -->
+    <div class="slider-side">
+      <div class="slider-car-price-display">
+        <span class="scp-label">Цена на автомобила в Корея</span>
+        <div class="scp-value-wrap">
+          <span class="scp-value" id="scp-display">10 000 000 ₩</span>
+        </div>
+        <div class="scp-eur-equiv">≈ <span id="scp-eur-equiv">—</span> EUR &nbsp;<span class="scp-rate-badge" id="scp-rate-badge">Зарежда курс…</span></div>
+        <div class="scp-divider"></div>
+        <br>
+        <hr style="border: none; height: 1px; background-color: #ccc; margin: 5px 0;">
+        <br>
+        <span class="scp-manual-label">Или въведете точна сума (₩):</span>
+        <div class="calc-input-wrap">
+         <!--- <span class="calc-currency">₩</span> -->
+          <input type="number" id="scp-input" class="calc-input" value="10000000" min="1000000" max="50000000" step="500000">
+        </div>
+      </div>
+
+      <div class="slider-track-wrap">
+        <input type="range" id="car-slider" class="car-slider" min="1000000" max="50000000" step="500000" value="10000000">
+        <div class="slider-labels">
+          <span>1M ₩</span>
+          <span>17M ₩</span>
+          <span>33M ₩</span>
+          <span>50M ₩</span>
+        </div>
+      </div>
+
     
           <div class="slider-toggles">
             <p class="slider-toggles-label">Включи допълнителни разходи:</p>
@@ -168,11 +179,11 @@
         <div class="slider-result">
           <div class="sr-inner">
             <div class="sr-label">Ориентировъчна крайна цена</div>
-            <div class="sr-total" id="sr-total">16 100 €</div>
+            <div class="sr-total" id="sr-total">— €</div>
             <div class="sr-note">вкл. транспорт, мито и ДДС</div>
     
             <div class="sr-breakdown">
-              <div class="sr-row"><span>Цена на колата</span><span id="sr-car">—</span></div>
+              <div class="sr-row"><span>Цена на колата (в EUR)</span><span id="sr-car">—</span></div>
               <div class="sr-row"><span>Транспорт &amp; логистика</span><span>~1 735 €</span></div>
               <div class="sr-row sr-tax"><span>Мито + ДДС</span><span id="sr-taxes">—</span></div>
               <div class="sr-row" id="sr-extras-row" style="display:none"><span>Допълнителни</span><span id="sr-extras">—</span></div>
@@ -184,6 +195,7 @@
         </div>
       </div>
     </section>
+    
     
     <!-- TIPS -->
     <section class="tips-section">
@@ -221,7 +233,7 @@
         <div class="contact-items">
           <div class="contact-item"><div class="c-icon">📍</div>гр. Варна, бул. Ян. Хунияди 31, ет. 2</div>
           <div class="contact-item"><div class="c-icon">📞</div>+359 877 888 605</div>
-          <div class="contact-item"><div class="c-icon">✉️</div>office@cargologistics-bg.com<a href="office@cargologistics-bg.com" class="__cf_email__"> </a></div>
+          <div class="contact-item"><div class="c-icon">✉️</div>office@cargologistics-bg.com<a href="mailto:office@cargologistics-bg.com" class="__cf_email__"> </a></div>
         </div>
       </div>
       <form class="contact-form fade-up" style="transition-delay:0.14s" onsubmit="handleSubmit(event)">
@@ -250,97 +262,143 @@
     <footer>
       <div class="footer-logo"><img src="Logo-2.png" alt="Cargo Logistics"></div>
       <ul class="footer-links">
-        <li><a href="#">Начало</a></li>
-        <li><a href="#">Услуги</a></li>
-        <li><a href="#">Внос от Корея</a></li>
-        <li><a href="#">Внос от Китай</a></li>
+        <li><a href="#start">Начало</a></li>
+        <li><a href="#how">Как работи</a></li>
+        <li><a href="#services">Услуги</a></li>
+        <li><a href="#calculator">Калкулатор</a></li>
+        <li><a href="#About">За нас</a></li>
         <li><a href="#contact">Контакти</a></li>
       </ul>
       <div class="footer-copy">© 2025 Cargo Logistics BG — Customs and Logistic Services</div>
     </footer>
     
     <script>
-    // Scroll animations
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
-      });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
-    
-    // Form submit
-    function handleSubmit(e) {
-      e.preventDefault();
-      const btn = e.target.querySelector('.form-submit');
-      btn.textContent = '✓ Изпратено успешно!';
-      btn.style.background = 'var(--lime-bright)';
-      setTimeout(() => {
-        btn.textContent = 'Изпрати Запитване →';
-        btn.style.background = '';
-        e.target.reset();
-      }, 3000);
-    }
-    
-    // Slider calculator
-    const FIXED_COSTS = 250 + 1300 + 30 + 100 + 92 + 92 + 435;
-    
-    function fmtEur(n) {
-      return n.toLocaleString('bg-BG', { minimumFractionDigits: 0, maximumFractionDigits: 0 }) + ' €';
-    }
-    
-    function sliderUpdate(carPrice) {
-      const dutyBase = (carPrice + 250 + 1300) * 1.32;
-      const duty = dutyBase * 0.10;
-      const vat  = (dutyBase + duty) * 0.20;
-      const taxes = duty + vat;
-    
-      let extras = 0;
-      if (document.getElementById('s-homologation').checked) extras += 307;
-      if (document.getElementById('s-gas').checked) extras += 153;
-      if (document.getElementById('s-sofia').checked) extras += 150;
-    
-      const total = carPrice + FIXED_COSTS + taxes + extras;
-    
-      document.getElementById('scp-display').textContent = fmtEur(carPrice);
-      document.getElementById('sr-total').textContent = fmtEur(total);
-      document.getElementById('sr-car').textContent = fmtEur(carPrice);
-      document.getElementById('sr-taxes').textContent = fmtEur(taxes);
-    
-      if (extras > 0) {
-        document.getElementById('sr-extras-row').style.display = '';
-        document.getElementById('sr-extras').textContent = fmtEur(extras);
-      } else {
-        document.getElementById('sr-extras-row').style.display = 'none';
+      // Scroll animations
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+      
+      // Form submit
+      function handleSubmit(e) {
+        e.preventDefault();
+        const btn = e.target.querySelector('.form-submit');
+        btn.textContent = '✓ Изпратено успешно!';
+        btn.style.background = 'var(--lime-bright)';
+        setTimeout(() => {
+          btn.textContent = 'Изпрати Запитване →';
+          btn.style.background = '';
+          e.target.reset();
+        }, 3000);
       }
-    
-      const sliderEl = document.getElementById('car-slider');
-      const pct = ((carPrice - sliderEl.min) / (sliderEl.max - sliderEl.min)) * 100;
-      sliderEl.style.background = `linear-gradient(to right, var(--lime) 0%, var(--lime) ${pct}%, #d8ecd0 ${pct}%, #d8ecd0 100%)`;
-    }
-    
-    const sliderEl = document.getElementById('car-slider');
-    const manualInput = document.getElementById('scp-input');
-    
-    sliderEl.addEventListener('input', () => {
-      const val = parseInt(sliderEl.value);
-      manualInput.value = val;
-      sliderUpdate(val);
-    });
-    
-    manualInput.addEventListener('input', () => {
-      let val = parseInt(manualInput.value) || 1000;
-      val = Math.min(Math.max(val, 1000), 50000);
-      sliderEl.value = val;
-      sliderUpdate(val);
-    });
-    
-    ['s-homologation', 's-gas', 's-sofia'].forEach(id => {
-      document.getElementById(id).addEventListener('change', () => {
-        sliderUpdate(parseInt(sliderEl.value));
+      
+      // ── KRW → EUR live rate calculator ──
+      const FIXED_EUR   = 250 + 1300 + 30 + 100 + 92 + 92 + 435; // fixed logistics costs in EUR
+      let   krwPerEur   = null; // filled after API call
+      
+      function fmtKrw(n) {
+        return n.toLocaleString('ko-KR') + ' ₩';
+      }
+      function fmtEur(n) {
+        return n.toLocaleString('bg-BG', { minimumFractionDigits: 0, maximumFractionDigits: 0 }) + ' €';
+      }
+      
+      function sliderUpdate(krwPrice) {
+        // Show KRW price
+        document.getElementById('scp-display').textContent = fmtKrw(krwPrice);
+      
+        if (!krwPerEur) {
+          document.getElementById('sr-total').textContent = 'Зарежда…';
+          return;
+        }
+      
+        const carEur = krwPrice / krwPerEur;
+      
+        // Show EUR equivalent of car price
+        document.getElementById('scp-eur-equiv').textContent =
+          '≈ ' + carEur.toLocaleString('bg-BG', { minimumFractionDigits: 0, maximumFractionDigits: 0 }) + ' EUR';
+      
+        // Duty & VAT
+        const dutyBase = (carEur + 250 + 1300) * 1.32;
+        const duty     = dutyBase * 0.10;
+        const vat      = (dutyBase + duty) * 0.20;
+        const taxes    = duty + vat;
+      
+        // Extras
+        let extras = 0;
+        if (document.getElementById('s-homologation').checked) extras += 307;
+        if (document.getElementById('s-gas').checked)          extras += 153;
+        if (document.getElementById('s-sofia').checked)        extras += 150;
+      
+        const total = carEur + FIXED_EUR + taxes + extras;
+      
+        document.getElementById('sr-car').textContent    = fmtEur(carEur);
+        document.getElementById('sr-taxes').textContent  = fmtEur(taxes);
+        document.getElementById('sr-total').textContent  = fmtEur(total);
+      
+        if (extras > 0) {
+          document.getElementById('sr-extras-row').style.display = '';
+          document.getElementById('sr-extras').textContent = fmtEur(extras);
+        } else {
+          document.getElementById('sr-extras-row').style.display = 'none';
+        }
+      
+        // Update slider fill
+        const sliderEl = document.getElementById('car-slider');
+        const pct = ((krwPrice - sliderEl.min) / (sliderEl.max - sliderEl.min)) * 100;
+        sliderEl.style.background =
+          `linear-gradient(to right, var(--lime) 0%, var(--lime) ${pct}%, #d8ecd0 ${pct}%, #d8ecd0 100%)`;
+      }
+      
+      // Fetch live KRW/EUR rate from Frankfurter (ECB-backed, no API key)
+      async function fetchRate() {
+        const badge = document.getElementById('scp-rate-badge');
+        try {
+          const res  = await fetch('https://api.frankfurter.dev/v1/latest?base=EUR&symbols=KRW');
+          const data = await res.json();
+          krwPerEur  = data.rates.KRW;
+          const rateDisplay = Math.round(krwPerEur).toLocaleString('ko-KR');
+          badge.textContent  = `1 € = ${rateDisplay} ₩  •  ${data.date}`;
+          badge.style.background = '#eef6ea';
+          sliderUpdate(parseInt(document.getElementById('car-slider').value));
+        } catch (err) {
+          badge.textContent  = 'Курсът е недостъпен';
+          badge.style.background = '#fde8e8';
+          badge.style.color = '#c0392b';
+          // fallback rate
+          krwPerEur = 1480;
+          sliderUpdate(parseInt(document.getElementById('car-slider').value));
+        }
+      }
+      
+      // Wire up slider and manual input
+      const sliderEl    = document.getElementById('car-slider');
+      const manualInput = document.getElementById('scp-input');
+      
+      sliderEl.addEventListener('input', () => {
+        const val = parseInt(sliderEl.value);
+        manualInput.value = val;
+        sliderUpdate(val);
       });
-    });
-    
-    sliderUpdate(10000);
-    </script>
+      
+      manualInput.addEventListener('input', () => {
+        let val = parseInt(manualInput.value) || 1000000;
+        val = Math.min(Math.max(val, 1000000), 50000000);
+        sliderEl.value = val;
+        sliderUpdate(val);
+      });
+      
+      ['s-homologation', 's-gas', 's-sofia'].forEach(id => {
+        document.getElementById(id).addEventListener('change', () => {
+          sliderUpdate(parseInt(sliderEl.value));
+        });
+      });
+      
+      // Init: show placeholder then fetch rate
+      sliderUpdate(10000000);
+      fetchRate();
+      </script>
     </body>
     </html>

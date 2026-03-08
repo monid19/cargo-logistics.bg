@@ -574,6 +574,19 @@
     padding: 1.8rem 2rem;
   }
   
+  .calc-input {
+    border: 1px solid #d8ecd0;
+    border-radius: 8px;
+    outline: none;
+    padding: 1.1rem 1rem; /* was 0.72rem — increased for more height */
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--gray-dark);
+    width: 100%;
+    background: transparent;
+  }
+
   .scp-label {
     font-size: 0.72rem;
     font-weight: 600;
