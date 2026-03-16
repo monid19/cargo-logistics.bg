@@ -287,7 +287,7 @@ document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
 
 
 // ── KRW → EUR live rate calculator ──
-const FIXED_EUR   = 250 + 1300 + 30 + 100 + 92 + 92 + 435; // fixed logistics costs in EUR
+const FIXED_EUR   = 250 + 1400 + 30 + 100 + 92 + 92 + 435; // fixed logistics costs in EUR
 let   krwPerEur   = null; // filled after API call
 
 function fmtKrw(n) {
@@ -314,7 +314,7 @@ function sliderUpdate(krwPrice) {
 
   // Fixed logistics costs (these are always added)
   const loading   = 250;
-  const transport = 1300;
+  const transport = 1400;
   const insurance = 30;
   const port      = 100;
   const customs   = 92;
