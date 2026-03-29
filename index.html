@@ -34,7 +34,7 @@
         <div class="hero-actions">
           <a href="#contact" class="btn-lime">Получи оферта</a>
           <a href="https://www.maersk.com/tracking/" target="_blank" class="btn-ghost-white">📡 Проследи доставка</a>
-          <a href="https://www.encar.com/index.do" target="_blank" class="btn-ghost-white">Избери автомобил от Encar</a>
+          <a href="https://www.encar.com/index.do" target="_blank" class="btn-ghost-white">Избери автомобил от Encar.com</a>
         </div>
         <div class="hero-stats">
           <div class="stat-item"><span class="stat-num">20+</span><span class="stat-label">Години опит</span></div>
@@ -239,13 +239,13 @@
       </div>
       <form class="contact-form fade-up" style="transition-delay:0.14s" action="https://formspree.io/f/xykbeoow" method="POST">
         <div class="form-row">
-          <div class="fg"><label>Вашето Име</label><input type="text" placeholder="Иван Иванов" required></div>
-          <div class="fg"><label>Телефон / Email</label><input type="text" placeholder="+359 ..." required></div>
+          <div class="fg"><label>Вашето Име</label><input type="text" name="име" placeholder="Иван Иванов" required></div>
+          <div class="fg"><label>Телефон / Email</label><input type="text" name="телефон_email" placeholder="+359 ..." required></div>
         </div>
-        <div class="fg"><label>Линк към автомобила (encar.com)</label><input type="url" placeholder="https://www.encar.com/..."></div>
+        <div class="fg"><label>Линк към автомобила (encar.com)</label><input type="url" name="линк_автомобил" placeholder="https://www.encar.com/..."></div>
         <div class="fg">
           <label>Бюджет (в EUR)</label>
-          <select>
+          <select name="бюджет">
             <option value="">Изберете диапазон</option>
             <option>До 5 000 EUR</option>
             <option>5 000 – 10 000 EUR</option>
@@ -254,7 +254,7 @@
             <option>Само транспорт (вече купена кола)</option>
           </select>
         </div>
-        <div class="fg"><label>Допълнителна информация</label><textarea placeholder="Марка, модел, година, специфични изисквания..."></textarea></div>
+        <div class="fg"><label>Допълнителна информация</label><textarea name="съобщение" placeholder="Марка, модел, година, специфични изисквания..."></textarea></div>
         <button type="submit" class="form-submit">Изпрати Запитване →</button>
       </form>
     </section>
