@@ -313,13 +313,13 @@ function sliderUpdate(krwPrice) {
     '≈ ' + carEur.toLocaleString('bg-BG', { minimumFractionDigits: 0, maximumFractionDigits: 0 }) + ' EUR';
 
   // Fixed logistics costs (these are always added)
-  const loading   = 250;
-  const transport = 1300;
+  const loading   = 262.5;
+  const transport = 1600;
   const insurance = 30;
-  const port      = 100;
-  const customs   = 92;
-  const unloading = 92;
-  const commission = 435;
+  const port      = 150;
+  const customs   = 100;
+  const unloading = 100;
+  const commission = 450;
 
   // Excel formula: Total = (car + loading + transport + insurance + port) * 1.32
   //                        + customs + unloading + commission + extras
